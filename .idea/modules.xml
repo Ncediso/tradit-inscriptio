@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/python_email_reports.iml" filepath="$PROJECT_DIR$/.idea/python_email_reports.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../tradit_inscriptio/.idea/tradit_inscriptio.iml" filepath="$PROJECT_DIR$/../tradit_inscriptio/.idea/tradit_inscriptio.iml" />
     </modules>
   </component>
 </project>
