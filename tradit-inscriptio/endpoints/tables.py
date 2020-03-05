@@ -1,7 +1,14 @@
-from flask import Blueprint, render_template, flash, redirect
+from flask import Blueprint, render_template, flash, redirect, request
 from ..app_utils.tables import Results
-tables = Blueprint('tables', __name__)
+from ..app_utils.db_setup import db_session
+from ..models.models import Report
 import requests
+
+import pandas as pd
+
+
+tables = Blueprint('tables', __name__)
+
 
 @tables.route("/tables")
 def show_tables():
@@ -24,7 +31,7 @@ def search_results(search):
     search_string = search.data['search']
 
     if search.data['search'] == '':
-        qry = db_session.query(Album)
+        qry = db_session.query(Report)
         results = qry.all()
 
     if not results:
@@ -37,21 +44,21 @@ def search_results(search):
         return render_template('results.html', table=table)
 
 
-@tables.route('/item/<int:id>', methods=['GET', 'POST'])
-def edit(id):
-    qry = db_session.query(Album).filter(
-                Album.id==id)
-    album = qry.first()
-    if album:
-        form = AlbumForm(formdata=request.form, obj=album)
-        if request.method == 'POST' and form.validate():
-            # save edits
-            save_changes(album, form)
-            flash('Album updated successfully!')
-            return redirect('/')
-        return render_template('edit_album.html', form=form)
-    else:
-        return 'Error loading #{id}'.format(id=id)
+# @tables.route('/item/<int:id>', methods=['GET', 'POST'])
+# def edit(id):
+#     qry = db_session.query(Report).filter(
+#                 Report.id==id)
+#     album = qry.first()
+#     if album:
+#         form = AlbumForm(formdata=request.form, obj=album)
+#         if request.method == 'POST' and form.validate():
+#             # save edits
+#             save_changes(album, form)
+#             flash('Album updated successfully!')
+#             return redirect('/')
+#         return render_template('edit_album.html', form=form)
+#     else:
+#         return 'Error loading #{id}'.format(id=id)
 
 
 def save_changes(album, form, new=False):
