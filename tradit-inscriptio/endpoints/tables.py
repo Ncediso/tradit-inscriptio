@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, flash, redirect, request
 from ..app_utils.tables import Results
 from ..app_utils.db_setup import db_session
-from ..models.models import Report
+from ..models.models import Report, Client
 import requests
 
 import pandas as pd
@@ -14,7 +14,7 @@ tables = Blueprint('tables', __name__)
 def show_tables():
     data = pd.read_excel('dummy_data.xlsx')
     data.set_index(['Name'], inplace=True)
-    data.index.name=None
+    data.index.name = None
     females = data.loc[data.Gender == 'f']
     males = data.loc[data.Gender == 'm']
     return render_template(
@@ -23,6 +23,37 @@ def show_tables():
             females.to_html(classes='female'),
             males.to_html(classes='male')],
         titles=['na', 'Female surfers', 'Male surfers'])
+
+
+@tables.route("/reports")
+def show_reports():
+    reports = Report.query.join("client").all()
+    print(len(reports))
+    items = list()
+    for report in reports:
+        # print("\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+
+        client = Client.get_by_id(report.client_id)
+        item = dict(
+            id=report.id,
+            report_name=report.name,
+            client_name=client.name,
+            report_date=report.report_date,
+            value_date=report.value_date,
+            report_path=report.report_path,
+            client_email_address=client.email_address,
+            email_status=report.email_status,
+            time=report.time,
+            is_return_report=report.is_return_report
+        )
+        # print(report)
+        # line.pp()
+        # client.pp()
+        items.append(item)
+    table = Results(items)
+
+    # print(len(reports))
+    return render_template('tables.html', table=table)
 
 
 @tables.route('/results')
@@ -79,3 +110,9 @@ def save_changes(album, form, new=False):
         db_session.add(album)
     # commit the data to the database
     db_session.commit()
+
+
+# export FLASK_APP=tradit-inscriptio/
+# export FLASK_ENV=Development
+# export FLASK_DEBUG=1
+#

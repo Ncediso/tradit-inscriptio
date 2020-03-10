@@ -1,16 +1,21 @@
 # import things
 from flask_table import Table, Col, LinkCol
+from flask import url_for
+
 
 # Declare your table
 class ItemTable(Table):
     name = Col('Name')
     description = Col('Description')
 
+
 # Get some objects
 class Item(object):
     def __init__(self, name, description):
         self.name = name
         self.description = description
+
+
 items = [Item('Name1', 'Description1'),
          Item('Name2', 'Description2'),
          Item('Name3', 'Description3')]
@@ -31,10 +36,23 @@ items = [Item('Name1', 'Description1'),
 
 
 class Results(Table):
+    classes = ['table', 'table-striped', 'table-responsive']
     id = Col('Id', show=False)
-    artist = Col('Artist')
-    title = Col('Title')
-    release_date = Col('Release Date')
-    publisher = Col('Publisher')
-    media_type = Col('Media')
-    edit = LinkCol('Edit', 'edit', url_kwargs=dict(id='id'))
+    report_name = Col('Report Name')
+    client_name = Col('Client Name')
+    report_date = Col('Report Date')
+    value_date = Col('Value Date')
+    report_path = Col('Report Path', show=False)
+    client_email_address = Col("Client Email Address")
+    email_status = Col('Email Status')
+    time = Col('Report Date Time')
+    is_return_report = Col('Is Rerun Report')
+
+    allow_sort = True
+
+    def sort_url(self, col_key, reverse=False):
+        if reverse:
+            direction = 'desc'
+        else:
+            direction = 'asc'
+        return url_for('tables.show_reports', sort=col_key, direction=direction)

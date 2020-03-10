@@ -1,10 +1,20 @@
 <!doctype html>
-<title>Simple tables</title>
+<head>
+	<meta charset="utf-8">
+	<title>Reports Module</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+
 <div class=page>
   <h1>Surfer groups - Pandas Table</h1>
-  {% for table in tables %}
-    <h2>{{titles[loop.index]}}</h2>
-    {{ table|safe }}
-  {% endfor %}
+
+  {{ table }}
+
+<!--  {% for table in tables %}-->
+<!--    <h2>{{titles[loop.index]}}</h2>-->
+<!--    {{ table|safe }}-->
+<!--  {% endfor %}-->
 </div>

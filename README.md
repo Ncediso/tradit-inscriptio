@@ -86,3 +86,23 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Inspiration
 * etc
 
+## DB Migration.
+
+Create a migration repository
+```
+$ flask db init
+```
+
+Generate a migration.
+```
+$ flask db migrate -m "Message"
+```
+
+Apply the migration to the database.
+```
+$ flask db upgrade
+```
+
+```
+$ flask db --help
+```
