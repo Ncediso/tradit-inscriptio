@@ -1,20 +1,60 @@
-<!doctype html>
-<head>
-	<meta charset="utf-8">
-	<title>Reports Module</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
-	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-</head>
-<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+{% extends 'layout.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
 
-<div class=page>
-  <h1>Surfer groups - Pandas Table</h1>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+<!--	<link rel="stylesheet" type="text/css" href="/static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">-->
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/util.css">
+	<link rel="stylesheet" type="text/css" href="/static/main.css">
+	<link rel="stylesheet" type="text/css" href="/static/style.css">
+<!--===============================================================================================-->
 
-  {{ table }}
 
-<!--  {% for table in tables %}-->
-<!--    <h2>{{titles[loop.index]}}</h2>-->
-<!--    {{ table|safe }}-->
-<!--  {% endfor %}-->
+<div class="container-fluid">
+	<div class="col-sx-3">
+		<h1>Hi</h1>
+	</div>
+	<div class="col-sx-9">
+		<h1>Surfer groups - Pandas Table</h1>
+
+	{{ table }}
+
+	<!--  {% for table in tables %}-->
+	<!--    <h2>{{titles[loop.index]}}</h2>-->
+	<!--    {{ table|safe }}-->
+	<!--  {% endfor %}-->
+	</div>
 </div>
+<!--===============================================================================================-->
+	<script src="/static/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/static/vendor/bootstrap/js/popper.js"></script>
+	<script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/static/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/static/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script>
+		$('.js-pscroll').each(function(){
+			var ps = new PerfectScrollbar(this);
+
+			$(window).on('resize', function(){
+				ps.update();
+			})
+		});
+
+
+	</script>
+<!--===============================================================================================-->
+	<script src="/static/js/main.js"></script>
+{% endblock content %}
+

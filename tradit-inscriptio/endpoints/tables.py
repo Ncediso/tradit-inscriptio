@@ -28,7 +28,7 @@ def show_tables():
 @tables.route("/reports")
 def show_reports():
     reports = Report.query.join("client").all()
-    print(len(reports))
+    # print(len(reports))
     items = list()
     for report in reports:
         # print("\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
@@ -111,8 +111,8 @@ def save_changes(album, form, new=False):
     # commit the data to the database
     db_session.commit()
 
-
+#
 # export FLASK_APP=tradit-inscriptio/
 # export FLASK_ENV=Development
 # export FLASK_DEBUG=1
-#
+
