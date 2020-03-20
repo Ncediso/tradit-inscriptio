@@ -11,10 +11,29 @@
 		<link href="{{ url_for('static', filename='css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
 		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+		<link rel="stylesheet" type="text/css" href="/static/vendor/bootstrap/css/bootstrap.min.css">
+		<script src="/static/vendor/jquery/jquery-3.2.1.min.js"></script>
+		<script scr="/static/js/main.js"></script>
 	</head>
 
 	<body class="is-preload">
 		<div class="main-page">
+			<nav class="navbar navbar-default" role="navigation">
+			  <div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				  <span class="icon-bar"></span>
+				  <span class="icon-bar"></span>
+				  <span class="icon-bar"></span>
+				</button>
+			  </div>
+			  <a class="navbar-brand" href="#"></a>
+			  <div class="navbar-collapse">
+				<ul class="nav navbar-nav navbar-right">
+				  <li><a href="/">Home</a></li>
+				  <li><a href="/results">Results</a></li>
+				</ul>
+			  </div>
+			</nav>
 		   {% block content %}
 		   {% endblock %}
 		</div>

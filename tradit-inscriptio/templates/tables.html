@@ -15,25 +15,39 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/static/util.css">
 	<link rel="stylesheet" type="text/css" href="/static/main.css">
-	<link rel="stylesheet" type="text/css" href="/static/style.css">
+<!--	<link rel="stylesheet" type="text/css" href="/static/style.css">-->
 <!--===============================================================================================-->
 
 
-<div class="container-fluid">
-	<div class="col-sx-3">
-		<h1>Hi</h1>
+<div class="limiter">
+	<div>
+		<form>
+			<select name="list\_status" id="clientList">
+			  {% for value, client_name in clients %}
+				<option value="{{value}}" {% if value== default %} selected {% endif %}>{{client_name}}</option>
+			  {% endfor %}
+			</select>
+		</form>
 	</div>
-	<div class="col-sx-9">
-		<h1>Surfer groups - Pandas Table</h1>
-
-	{{ table }}
-
-	<!--  {% for table in tables %}-->
-	<!--    <h2>{{titles[loop.index]}}</h2>-->
-	<!--    {{ table|safe }}-->
-	<!--  {% endfor %}-->
+	<div class="container-table100">
+		<div class="wrap-table100">
+			<div class="table100 ver1 m-b-110">
+				<div class="table100-head">
+					<table>
+						{{ table_head }}
+					</table>
+				</div>
+				<div class="table100-body js-pscroll">
+					<table>
+						{{ table_body }}
+					</table>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
+
+
 <!--===============================================================================================-->
 	<script src="/static/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->

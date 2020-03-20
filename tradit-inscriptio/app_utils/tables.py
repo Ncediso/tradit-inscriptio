@@ -36,7 +36,7 @@ items = [Item('Name1', 'Description1'),
 
 
 class Results(Table):
-    classes = ['table', 'table-striped', 'table-responsive', 'table-hover', 'mx-auto', ' w-auto']
+    # classes = ['table', 'table-striped', 'table-responsive', 'table-hover', 'mx-auto', ' w-auto']
     id = Col('Id', show=False)
     report_name = Col('Report Name')
     client_name = Col('Client Name')

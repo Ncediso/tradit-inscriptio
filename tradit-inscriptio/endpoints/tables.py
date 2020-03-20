@@ -1,8 +1,9 @@
-from flask import Blueprint, render_template, flash, redirect, request
+from flask import Blueprint, render_template, flash, redirect, request, Markup
 from ..app_utils.tables import Results
 from ..app_utils.db_setup import db_session
 from ..models.models import Report, Client
 import requests
+from sqlalchemy.orm import load_only
 
 import pandas as pd
 
@@ -26,13 +27,12 @@ def show_tables():
 
 
 @tables.route("/reports")
-def show_reports():
-    reports = Report.query.join("client").all()
+def show_reports(client_id=None):
+    reports = Report.query.filter_by(report_date='2020-03-09').join("client").all()
     # print(len(reports))
+
     items = list()
     for report in reports:
-        # print("\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-
         client = Client.get_by_id(report.client_id)
         item = dict(
             id=report.id,
@@ -46,14 +46,25 @@ def show_reports():
             time=report.time,
             is_return_report=report.is_return_report
         )
-        # print(report)
-        # line.pp()
-        # client.pp()
         items.append(item)
     table = Results(items)
+    table_head = table.thead()
+    table_head = table_head.replace("<tr>", '<tr class="row100 head">')
+    table_head = table_head.replace("<th>", '<th class="cell100 column-dynamic">')
+    table_head = Markup(table_head)
 
-    # print(len(reports))
-    return render_template('tables.html', table=table)
+    table_body = table.tbody()
+    table_body = table_body.replace("<tr>", '<tr class="row100 body">')
+    table_body = table_body.replace("<td>", '<td class="cell100 column-dynamic">')
+    table_body = Markup(table_body)
+
+    fields = ['id', 'name']
+    clients = Client.query.options(load_only(*fields)).all()
+
+    client_list = [('-1', 'All Clients')] + [(client.id, client.name) for client in clients]
+    default = '-1'
+    return render_template('tables.html', table_head=table_head, table_body=table_body,
+                           clients=client_list, default=default)
 
 
 @tables.route('/results')

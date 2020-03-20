@@ -23,3 +23,25 @@
     
 
 })(jQuery);
+
+$( document ).ready(function(){
+
+  function getData() {
+    var canvas = document.getElementById("clientList");
+    var clientId = canvas.options[canvas.selectedIndex].value;
+
+    $.post( "/postmethod", {
+      canvas_data: JSON.stringify(outputData)
+    }, function(err, req, resp){
+      window.location.href = "/reports/"+clientId;
+    });
+  }
+
+//  $( "#clearButton" ).click(function(){
+//    clearCanvas();
+//  });
+
+  $( "#sendButton" ).click(function(){
+    getData();
+  });
+});

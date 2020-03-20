@@ -2,6 +2,7 @@
 """Main application package."""
 
 import os
+# import yaml
 import logging
 from config import Config
 from flask_script import Manager
@@ -34,9 +35,13 @@ def _register_blueprints(main_app):
 def _register_login_handlers(main_app):
     """
 
-    :param main_app: FLask Application
+    :param main_app: Flask Application
     :return:
     """
+
+    # with open('config.yaml', 'r') as f:
+    #     config = yaml.safe_load(f.read())
+    #     logging.config.dictConfig(config)
 
     context_provider = ContextualFilter()
     main_app.logger.addFilter(context_provider)

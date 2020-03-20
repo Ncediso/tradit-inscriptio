@@ -1,5 +1,6 @@
-from flask import render_template, Blueprint, send_from_directory
+from flask import render_template, Blueprint, send_from_directory, request, jsonify
 import os
+import uuid
 
 main = Blueprint('main', __name__)
 
@@ -16,3 +17,18 @@ def favicon():
 def home():
     """"""
     return render_template('index.html')
+
+
+@main.route('/postmethod', methods=['POST'])
+def post_javascript_data():
+    jsdata = request.form['canvas_data']
+    unique_id = create_csv(jsdata)
+    params = {'uuid': unique_id}
+    return jsonify(params)
+
+
+def create_csv(text):
+    unique_id = str(uuid.uuid4())
+    with open('images/'+unique_id+'.csv', 'a') as file:
+        file.write(text[1:-1]+"\n")
+    return unique_id
