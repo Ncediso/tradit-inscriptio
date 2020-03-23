@@ -19,16 +19,8 @@ def home():
     return render_template('index.html')
 
 
-@main.route('/postmethod', methods=['POST'])
-def post_javascript_data():
-    jsdata = request.form['canvas_data']
-    unique_id = create_csv(jsdata)
-    params = {'uuid': unique_id}
-    return jsonify(params)
-
-
-def create_csv(text):
-    unique_id = str(uuid.uuid4())
-    with open('images/'+unique_id+'.csv', 'a') as file:
-        file.write(text[1:-1]+"\n")
-    return unique_id
+# def create_csv(text):
+#     unique_id = str(uuid.uuid4())
+#     with open('images/'+unique_id+'.csv', 'a') as file:
+#         file.write(text[1:-1]+"\n")
+#     return unique_id

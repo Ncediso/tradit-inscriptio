@@ -22,7 +22,7 @@
 <div class="limiter">
 	<div>
 		<form>
-			<select name="list\_status" id="clientList">
+			<select name="list\_status" id="clientList" >
 			  {% for value, client_name in clients %}
 				<option value="{{value}}" {% if value== default %} selected {% endif %}>{{client_name}}</option>
 			  {% endfor %}
@@ -65,8 +65,6 @@
 				ps.update();
 			})
 		});
-
-
 	</script>
 <!--===============================================================================================-->
 	<script src="/static/js/main.js"></script>

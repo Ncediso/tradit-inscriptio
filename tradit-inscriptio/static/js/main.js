@@ -29,19 +29,31 @@ $( document ).ready(function(){
   function getData() {
     var canvas = document.getElementById("clientList");
     var clientId = canvas.options[canvas.selectedIndex].value;
+    // $.post(url,[data],[callback],[type]);
 
-    $.post( "/postmethod", {
-      canvas_data: JSON.stringify(outputData)
-    }, function(err, req, resp){
-      window.location.href = "/reports/"+clientId;
-    });
+    if (clientId != "-1"){
+        $.post( "/post-filter-report", {
+          canvas_data: JSON.stringify(clientId)
+        }, function(err, req, resp){
+          window.location.href = "/reports/"+clientId;
+            l = 1;
+        });
+    }
+    else{
+        $.post( "/post-filter-report", {
+          canvas_data: JSON.stringify(clientId)
+        }, function(err, req, resp){
+          window.location.href = "/reports";
+        });
+    }
+
   }
 
 //  $( "#clearButton" ).click(function(){
 //    clearCanvas();
 //  });
 
-  $( "#sendButton" ).click(function(){
+  $( "#clientList" ).change(function(){
     getData();
   });
 });
