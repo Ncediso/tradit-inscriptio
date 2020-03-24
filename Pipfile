@@ -6,16 +6,6 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-requests = "*"
-flask = "*"
-flask-mail = "*"
-pyodbc = "*"
-sqlalchemy = "*"
-flask-migrate = "*"
-flask-sqlalchemy = "*"
-flask-table = "*"
-pandas = "*"
-flask-script = "*"
-datetime = "*"
-flask-login = "*"
-xlrd = "*"
+
+[requires]
+python_version = "3.7"
