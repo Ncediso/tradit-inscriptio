@@ -17,35 +17,58 @@
 	<link rel="stylesheet" type="text/css" href="/static/main.css">
 <!--	<link rel="stylesheet" type="text/css" href="/static/style.css">-->
 <!--===============================================================================================-->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<!--	<script src="//code.jquery.com/jquery-1.10.2.js"></script>-->
+	<script src="/static/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<script>
+	$(function() {
+		$( ".dtpick" ).datepicker();
+	});
+	</script>
 
+  	<div class="limiter">
+		<div>
+			<form>
+				<div class="row">
 
-<div class="limiter">
-	<div>
-		<form>
-			<select name="list\_status" id="clientList" >
-			  {% for value, client_name in clients %}
-				<option value="{{value}}" {% if value== default %} selected {% endif %}>{{client_name}}</option>
-			  {% endfor %}
-			</select>
-		</form>
-	</div>
-	<div class="container-table100">
-		<div class="wrap-table100">
-			<div class="table100 ver1 m-b-110">
-				<div class="table100-head">
-					<table>
-						{{ table_head }}
-					</table>
+					<div class='col-sm-6'>
+						<select name="list\_status" id="clientList" >
+						  {% for value, client_name in clients %}
+							<option value="{{value}}" {% if value== default %} selected {% endif %}>{{client_name}}</option>
+						  {% endfor %}
+						</select>
+					</div>
+
+					<div class='col-sm-6'>
+						<form method="post" action="">
+							{{ form.hidden_tag() }}
+							Report Date: {{ form.date_field(class="dtpick") }}
+	<!--						<button type="submit">Go</button>-->
+						</form>
+					</div>
+
 				</div>
-				<div class="table100-body js-pscroll">
-					<table>
-						{{ table_body }}
-					</table>
+
+			</form>
+		</div>
+		<div class="container-table100">
+			<div class="wrap-table100">
+				<div class="table100 ver1 m-b-110">
+					<div class="table100-head">
+						<table>
+							{{ table_head }}
+						</table>
+					</div>
+					<div class="table100-body js-pscroll">
+						<table>
+							{{ table_body }}
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
 
 <!--===============================================================================================-->
@@ -67,6 +90,13 @@
 		});
 	</script>
 <!--===============================================================================================-->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+	  <script type="text/javascript">
+		$(function () {
+		  $('#datepick').datetimepicker();
+		});
+	  </script>
 	<script src="/static/js/main.js"></script>
+
 {% endblock content %}
 

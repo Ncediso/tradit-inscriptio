@@ -33,7 +33,7 @@ $( document ).ready(function(){
 
     if (clientId != "-1"){
         $.post( "/post-filter-report", {
-          canvas_data: JSON.stringify(clientId)
+          client_id: JSON.stringify(clientId)
         }, function(err, req, resp){
           window.location.href = "/reports/"+clientId;
             l = 1;
@@ -41,7 +41,7 @@ $( document ).ready(function(){
     }
     else{
         $.post( "/post-filter-report", {
-          canvas_data: JSON.stringify(clientId)
+          client_id: JSON.stringify(clientId)
         }, function(err, req, resp){
           window.location.href = "/reports";
         });

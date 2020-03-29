@@ -5,7 +5,7 @@ from ..app_utils.db_setup import db_session
 from ..models.models import Report, Client
 import requests
 import json
-
+from ..app_utils.forms import DateForm
 import pandas as pd
 
 
@@ -37,13 +37,18 @@ def show_reports():
     client_list = [('-1', 'All Clients')] + table_utils.get_clients()
     default = '-1'
 
+    date_field_form = DateForm()
+
     return render_template(
         'tables.html', table_head=table_head, table_body=table_body,
-        clients=client_list, default=default)
+        clients=client_list, default=default, form=date_field_form)
 
 
 @tables.route("/reports/<client_id>")
 def show_clients_reports(client_id):
+    date_field_form = DateForm()
+    if date_field_form.validate_on_submit():
+        print(date_field_form.date_field.data.strftime('%x'))
     client_id_int = int(json.loads(client_id, parse_int=int))
     items = table_utils.get_reports(client_id)
 
@@ -56,14 +61,16 @@ def show_clients_reports(client_id):
     client_list = [('-1', 'All Clients')] + data + client_list
     default = data[0][0]
 
+    # date_field_form = DateForm()
+
     return render_template(
         'tables.html', table_head=table_head, table_body=table_body,
-        clients=client_list, default=default)
+        clients=client_list, default=default, form=date_field_form)
 
 
 @tables.route('/post-filter-report', methods=['POST'])
 def filter_reports():
-    js_data = request.form['canvas_data']
+    js_data = request.form['client_id']
     js_object = int(json.loads(js_data, parse_int=int))
     if js_object != -1:
         return redirect(url_for('tables.show_clients_reports', client_id=js_object))

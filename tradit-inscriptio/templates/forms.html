@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+    <meta charset="utf-8">
+	<title>DatePicker Example</title>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<!--	<script src="//code.jquery.com/jquery-1.10.2.js"></script>-->
+	<script src="/static/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<script>
+	$(function() {
+		$( ".dtpick" ).datepicker();
+	});
+	</script>
+
+    <form method="post" action="">
+        {{ form.hidden_tag() }}
+        {{ form.date_field(class="dtpick") }}
+        <button type="submit">Go</button>
+    </form>
+
+{% endblock content %}
